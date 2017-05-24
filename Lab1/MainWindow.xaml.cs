@@ -27,7 +27,29 @@ namespace Lab1
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            ImpedanciaText.Text = "oi";
+            NumeroComplexo ImpedanciaCarga = new NumeroComplexo(0,0);
+            double ImpedanciaIntrinseca;
+
+            try
+            {
+                ImpedanciaCarga.parteReal = Convert.ToDouble(ImpedanciaCargaRealText.Text);
+                ImpedanciaCarga.parteImaginaria = Convert.ToDouble(ImpedanciaCargaImagText.Text);
+                ImpedanciaIntrinseca = Convert.ToDouble(ImpedanciaIntriText.Text);
+
+            }
+            catch(FormatException)
+            {
+                MessageBox.Show("Um valor de impedância dado é invalido! Tente novamente.","Erro de formato");
+            }
+            catch(OverflowException)
+            {
+                MessageBox.Show("Um valor de impedância é grande demais ou pequeno demais! Tente novamente.");
+            }
+        }
+
+        private void ImpedanciaCargaText_Copy4_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
