@@ -27,7 +27,7 @@ namespace Lab1
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-
+            ImpedanciaText.Text = "oi";
         }
     }
 }

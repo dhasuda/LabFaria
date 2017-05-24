@@ -8,7 +8,7 @@
         Title="MainWindow" Height="350" Width="293">
     <Grid>
         <Button x:Name="button" Content="Calcular" HorizontalAlignment="Left" Margin="200,180,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="155,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ImpedanciaText" HorizontalAlignment="Left" Height="23" Margin="155,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="155,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="155,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label" Content="impedancia carga" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="0,25,0,0"/>
