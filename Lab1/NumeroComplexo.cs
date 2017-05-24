@@ -20,6 +20,8 @@ namespace Lab1
         }
 
         //Funcoes de complexos
+
+        // Complexo operado com complexo
         public NumeroComplexo Complemento()
         {
             return new NumeroComplexo(this.parteReal, -this.parteImaginaria);
@@ -33,7 +35,7 @@ namespace Lab1
 
         public static NumeroComplexo operator +(NumeroComplexo c1, NumeroComplexo c2)
         {
-            return new NumeroComplexo(c1.parteReal + c2.parteReal, c1.parteImaginaria + c1.parteImaginaria);
+            return new NumeroComplexo(c1.parteReal + c2.parteReal, c1.parteImaginaria + c2.parteImaginaria);
         }
 
         public static NumeroComplexo operator -(NumeroComplexo c1, NumeroComplexo c2)
@@ -47,12 +49,25 @@ namespace Lab1
                 (c1.parteReal * c2.parteImaginaria) + (c1.parteImaginaria * c2.parteReal));
         }
 
-        public static NumeroComplexo operator /(NumeroComplexo c1, NumeroComplexo c2)
+        // Real operado com complexo
+        public static NumeroComplexo operator +(NumeroComplexo c1, double r)
         {
-            NumeroComplexo result = c1 * c2.Complemento();
-            result.parteReal /= c2.Modulo();
-            result.parteImaginaria /= c2.Modulo();
-            return result;
+            return new NumeroComplexo(c1.parteReal + r, c1.parteImaginaria);
+        }
+
+        public static NumeroComplexo operator -(NumeroComplexo c1, double r)
+        {
+            return new NumeroComplexo(c1.parteReal - r, c1.parteImaginaria);
+        }
+
+        public static NumeroComplexo operator *(NumeroComplexo c1, double r)
+        {
+            return new NumeroComplexo(c1.parteReal * r, c1.parteImaginaria * r);
+        }
+
+        public static NumeroComplexo operator /(NumeroComplexo c1, double r)
+        {
+            return new NumeroComplexo(c1.parteReal / r, c1.parteImaginaria / r);
         }
     }
 }
