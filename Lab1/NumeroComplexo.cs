@@ -49,6 +49,13 @@ namespace Lab1
                 (c1.parteReal * c2.parteImaginaria) + (c1.parteImaginaria * c2.parteReal));
         }
 
+        public static NumeroComplexo operator /(NumeroComplexo c1, NumeroComplexo c2)
+        {
+            NumeroComplexo resposta = c1 * c2.Complemento();
+            resposta = resposta / c2.Modulo();
+            return resposta;
+        }
+
         // Real operado com complexo
         public static NumeroComplexo operator +(NumeroComplexo c1, double r)
         {

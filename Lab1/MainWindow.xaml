@@ -5,32 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab1"
         mc:Ignorable="d"
-        Title="Calculadora de Toco Simples" Height="309.119" Width="358.972" Topmost="True">
-    <Grid>
+        Title="Calculadora de Toco Simples" Height="447.285" Width="390.972" Topmost="True">
+    <Grid Margin="0,0,2,2">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto" MinWidth="79"/>
-            <ColumnDefinition Width="Auto" MinWidth="21"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="button" Content="Calcular" HorizontalAlignment="Left" Margin="182,148,0,0" VerticalAlignment="Top" Width="74" Click="button_Click" Grid.ColumnSpan="3" Height="20"/>
-        <Label x:Name="label" Content="Impedância de Carga:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="13,25,0,0" Height="26" Width="125"/>
-        <Label x:Name="label_Copy" Content="Impedância Intrinseca:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="13,66,0,0" Height="26" Width="128"/>
-        <Label x:Name="label_Copy1" Content="Frequência:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="13,107,0,0" Height="26" Width="70"/>
-        <Label x:Name="label_Copy2" Content="Distância:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="13,194,0,0" Height="26" Width="60"/>
-        <Label x:Name="label_Copy3" Content="Comprimento:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="13,235,0,0" Height="26" Width="94"/>
-        <TextBox x:Name="ImpedanciaCargaRealText" HorizontalAlignment="Left" Height="26" Margin="147,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
-        <TextBox x:Name="ImpedanciaCargaImagText" HorizontalAlignment="Left" Height="26" Margin="0,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Grid.Column="2"/>
-        <Label x:Name="label_Copy6" Content="j" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="61,25,0,0" Width="18" Grid.Column="2" Height="26"/>
-        <Label x:Name="label_Copy7" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="208,25,0,0" Width="18" Height="26"/>
-        <TextBox x:Name="FrequenciaText" HorizontalAlignment="Left" Height="26" Margin="188,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Grid.ColumnSpan="3"/>
-        <Label x:Name="label_Copy9" Content="Hz" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="21,107,0,0" Width="25" Grid.Column="2" Height="26"/>
-        <TextBox x:Name="ImpedanciaIntriText" HorizontalAlignment="Left" Height="26" Margin="188,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" Grid.ColumnSpan="3"/>
-        <Label x:Name="label_Copy4" Content="Ohms" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="21,66,0,0" Width="45" Grid.Column="2" Height="26"/>
-        <Label x:Name="label_Copy5" Content="Ohms" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="0,25,-22,0" Width="45" Grid.Column="4" Height="26"/>
-        <Label x:Name="DistanciaText" Content="0 cm" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="188,194,0,0" Height="26" Width="63" Grid.ColumnSpan="3"/>
-        <Label x:Name="DistanciaText_Copy" Content="0 cm" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="188,235,0,0" Height="26" Width="63" Grid.ColumnSpan="3"/>
+        <Button x:Name="button" Content="Calcular" HorizontalAlignment="Left" Margin="202,181,0,0" VerticalAlignment="Top" Width="74" Click="button_Click" Height="20"/>
+        <Label x:Name="label" Content="Impedância de Carga:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="10,25,0,0" Height="26" Width="125"/>
+        <Label x:Name="label_Copy" Content="Impedância Intrinseca:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="10,66,0,0" Height="26" Width="128"/>
+        <Label x:Name="label_Copy1" Content="Frequência:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="10,107,0,0" Height="26" Width="70"/>
+        <Label x:Name="label_Copy2" Content="Distância:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="34,243,0,0" Height="26" Width="60"/>
+        <Label x:Name="label_Copy3" Content="Comprimento:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="34,274,0,0" Height="26" Width="94"/>
+        <TextBox x:Name="ImpedanciaCargaRealText" HorizontalAlignment="Left" Height="26" Margin="172,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
+        <TextBox x:Name="ImpedanciaCargaImagText" HorizontalAlignment="Left" Height="26" Margin="249,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" TextChanged="ImpedanciaCargaImagText_TextChanged"/>
+        <Label x:Name="label_Copy6" Content="j" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="312,25,0,0" Width="14" Height="26"/>
+        <Label x:Name="label_Copy7" Content="+" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="233,25,0,0" Height="26" FlowDirection="RightToLeft" HorizontalAlignment="Left"/>
+        <TextBox x:Name="FrequenciaText" HorizontalAlignment="Left" Height="26" Margin="208,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
+        <Label x:Name="label_Copy9" Content="Hz" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="269,107,0,0" Width="25" Height="26"/>
+        <TextBox x:Name="ImpedanciaIntriText" HorizontalAlignment="Left" Height="26" Margin="208,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
+        <Label x:Name="label_Copy4" Content="Ohms" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="269,66,0,0" Width="45" Height="26"/>
+        <Label x:Name="label_Copy5" Content="Ohms" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="326,25,0,0" Width="44" Height="26"/>
+        <Label x:Name="Distancia1Text" Content="0 cm" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="168,243,0,0" Height="26" Width="63"/>
+        <Label x:Name="Compimento1Text" Content="0 cm" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="168,274,0,0" Height="26" Width="63"/>
+        <Label x:Name="label_Copy8" Content="Permissividade Relativa:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="10,143,0,0" Height="26" Width="152"/>
+        <TextBox x:Name="PermissividadeRelativaText" HorizontalAlignment="Left" Height="26" Margin="208,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" FlowDirection="RightToLeft"/>
+        <Label x:Name="label_Copy10" Content="Distância:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="34,338,0,0" Height="26" Width="60"/>
+        <Label x:Name="label_Copy11" Content="Comprimento:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="34,369,0,0" Height="26" Width="94"/>
+        <Label x:Name="Distancia2Text" Content="0 cm" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="168,338,0,0" Height="26" Width="63"/>
+        <Label x:Name="Compimento2Text" Content="0 cm" HorizontalAlignment="Left" RenderTransformOrigin="0.632,1.538" Margin="168,369,0,6" Width="63"/>
+        <Label x:Name="label_Copy12" Content="Toco 1:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="10,217,0,0" Height="26" Width="60"/>
+        <Label x:Name="label_Copy13" Content="Toco 2:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.632,1.538" Margin="10,312,0,0" Height="26" Width="60"/>
 
     </Grid>
 </Window>
