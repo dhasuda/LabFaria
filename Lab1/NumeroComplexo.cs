@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class NumeroComplexo
+    public class NumeroComplexo
     {
         // Variaveis
         public double parteReal { get; set; }

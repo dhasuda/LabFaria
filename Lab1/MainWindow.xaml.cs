@@ -28,14 +28,34 @@ namespace Lab1
         private void button_Click(object sender, RoutedEventArgs e)
         {
             NumeroComplexo ImpedanciaCarga = new NumeroComplexo(0,0);
+            Calculos calculadora = new Calculos();
             double ImpedanciaIntrinseca;
+            double PermissividadeRelativa;
+            double distancia1, distancia2;
+            double comprimento1, comprimento2;
+            double frequencia;
+            double larguraBanda;
+            double SWRmax, SWRmin;
 
             try
             {
                 ImpedanciaCarga.parteReal = Convert.ToDouble(ImpedanciaCargaRealText.Text);
                 ImpedanciaCarga.parteImaginaria = Convert.ToDouble(ImpedanciaCargaImagText.Text);
                 ImpedanciaIntrinseca = Convert.ToDouble(ImpedanciaIntriText.Text);
+                PermissividadeRelativa = Convert.ToDouble(PermissividadeRelativaText.Text);
+                frequencia = Convert.ToDouble(FrequenciaText.Text);
+                larguraBanda = Convert.ToDouble(LarguraBandaText.Text);
 
+                distancia1 = calculadora.distance(calculadora.t_minus(ImpedanciaCarga.parteImaginaria,ImpedanciaCarga.parteReal,ImpedanciaIntrinseca), frequencia, PermissividadeRelativa)*100;
+                distancia2 = calculadora.distance(calculadora.t_plus(ImpedanciaCarga.parteImaginaria, ImpedanciaCarga.parteReal, ImpedanciaIntrinseca), frequencia, PermissividadeRelativa)*100;
+                comprimento1 = calculadora.length(ImpedanciaCarga,ImpedanciaIntrinseca,frequencia,PermissividadeRelativa)*100;
+                comprimento2 = comprimento1;
+
+                
+
+
+                Distancia1Text.Content= Convert.ToString(distancia1);
+                Distancia2Text.Content = Convert.ToString(distancia2);
             }
             catch(FormatException)
             {
@@ -48,6 +68,11 @@ namespace Lab1
         }
 
         private void ImpedanciaCargaText_Copy4_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ImpedanciaCargaImagText_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
