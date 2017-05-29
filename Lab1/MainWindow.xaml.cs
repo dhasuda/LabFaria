@@ -46,16 +46,25 @@ namespace Lab1
                 frequencia = Convert.ToDouble(FrequenciaText.Text);
                 larguraBanda = Convert.ToDouble(LarguraBandaText.Text);
 
-                distancia1 = calculadora.distance(calculadora.t_minus(ImpedanciaCarga.parteImaginaria,ImpedanciaCarga.parteReal,ImpedanciaIntrinseca), frequencia, PermissividadeRelativa)*100;
-                distancia2 = calculadora.distance(calculadora.t_plus(ImpedanciaCarga.parteImaginaria, ImpedanciaCarga.parteReal, ImpedanciaIntrinseca), frequencia, PermissividadeRelativa)*100;
-                comprimento1 = calculadora.length(ImpedanciaCarga,ImpedanciaIntrinseca,frequencia,PermissividadeRelativa)*100;
+                distancia1 = calculadora.distance_minus(ImpedanciaCarga.parteImaginaria,ImpedanciaCarga.parteReal,ImpedanciaIntrinseca,frequencia,PermissividadeRelativa)*100;
+                distancia2 = calculadora.distance_plus(ImpedanciaCarga.parteImaginaria, ImpedanciaCarga.parteReal, ImpedanciaIntrinseca, frequencia, PermissividadeRelativa) *100;
+
+                comprimento1 = calculadora.length(ImpedanciaCarga, ImpedanciaIntrinseca, frequencia, PermissividadeRelativa);
                 comprimento2 = comprimento1;
 
-                
+                SWRmin = calculadora.swr(,ImpedanciaIntrinseca);// só falta colocar o primeiro argumento dessa função
+                SWRmax = calculadora.swr(,ImpedanciaIntrinseca);// e dessa tbm. :)
+
 
 
                 Distancia1Text.Content= Convert.ToString(distancia1);
                 Distancia2Text.Content = Convert.ToString(distancia2);
+
+                Compimento1Text.Content = Convert.ToString(comprimento1);
+                Compimento2Text.Content = Convert.ToString(comprimento2);
+
+                SWRmaxText.Content = Convert.ToString(SWRmax);
+                SWRminText.Content = Convert.ToString(SWRmin);
             }
             catch(FormatException)
             {
