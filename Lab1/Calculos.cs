@@ -17,9 +17,11 @@ namespace Lab1
 
         }
 
+
         //Metodos
+
         //Retorna a raiz positiva na conta de t
-        public double t_plus(double XL, double RL, double Z0)
+        private double t_plus(double XL, double RL, double Z0)
         {
             if (RL != Z0)
                 return (XL + Math.Sqrt((RL / Z0) * (((Z0 - RL) * (Z0 - RL)) + (XL * XL)))) / (RL - Z0);
@@ -27,45 +29,77 @@ namespace Lab1
                 return XL / (2 * Z0);
         }
         //Retorna a raiz negativa na conta de t
-        public double t_minus(double XL, double RL, double Z0)
+        private double t_minus(double XL, double RL, double Z0)
         {
             if (RL != Z0)
                 return (XL - Math.Sqrt((RL / Z0) * (((Z0 - RL) * (Z0 - RL)) + (XL * XL)))) / (RL - Z0);
             else
                 return XL / (2 * Z0);
         }
-        //Retorna a razao d / lambda
-        public double d_lambda(double t)
+
+
+        //Retorna a razao d / lambda, para t_plus
+        private double d_lambda_plus(double XL, double RL, double Z0)
         {
-            if (t >= 0)
-                return (1 / (2 * 3.1415)) * Math.Atan(t);
+            double tpl = t_plus(XL, RL, Z0);
+            if (tpl >= 0)
+                return (1 / (2 * 3.1415)) * Math.Atan(tpl);
             else
-                return (1 / (2 * 3.1415)) * (3.141500 + Math.Atan(t));
+                return (1 / (2 * 3.1415)) * (3.141500 + Math.Atan(tpl));
+        }
+        //Retorna a razao d / lambda, para t_minus
+        private double d_lambda_minus(double XL, double RL, double Z0)
+        {
+            double tmin = t_minus(XL, RL, Z0);
+            if (tmin >= 0)
+                return (1 / (2 * 3.1415)) * Math.Atan(tmin);
+            else
+                return (1 / (2 * 3.1415)) * (3.141500 + Math.Atan(tmin));
         }
 
-        public double distance(double t, double freq, double epsilonRel)
+
+        //Retorna a distancia, para t_plus
+        public double distance_plus(double XL, double RL, double Z0, double freq, double epsilonRel)
         {
             double c = 299792458;
-            return d_lambda(t) * (c / freq);
+            return d_lambda_plus(XL, RL, Z0) * (c / (freq * Math.Sqrt(epsilonRel)));
+        }
+        //Retorna a distancia, para t_minus
+        public double distance_minus(double XL, double RL, double Z0, double freq, double epsilonRel)
+        {
+            double c = 299792458;
+            return d_lambda_minus(XL, RL, Z0) * (c / (freq * Math.Sqrt(epsilonRel)));
         }
 
-        //Retorna o valor de Z
-        public NumeroComplexo Z(double XL, double RL, double Z0, double d, double beta)
+
+
+        //Retorna o valor de Z, para t_plus
+        public NumeroComplexo Z_plus(double XL, double RL, double Z0, double freq, double epsilonRel)
         {
-            NumeroComplexo ZL = new NumeroComplexo(0, 0);
-            ZL.parteReal = RL;
-            ZL.parteImaginaria = XL;
-            NumeroComplexo c1 = new NumeroComplexo(0, 0); ;
-            NumeroComplexo c2 = new NumeroComplexo(0, 0); ;
-            c1.parteReal = ZL.parteReal;
-            c1.parteImaginaria = ZL.parteImaginaria + Z0 * Math.Tan(beta * d);
-            c2.parteReal = Z0 - ZL.parteImaginaria * Math.Tan(beta * d);
-            c2.parteImaginaria = ZL.parteReal * Math.Tan(beta * d);
+            double c = 299792458;
+            double beta = (2 * 3.1415) / (c / (freq * Math.Sqrt(epsilonRel)));
+            double dpl = distance_plus(XL, RL, Z0, freq, epsilonRel);
+            NumeroComplexo ZL = new NumeroComplexo(RL, XL);
+            NumeroComplexo c1 = new NumeroComplexo(ZL.parteReal, ZL.parteImaginaria + Z0 * Math.Tan(beta * dpl)); ;
+            NumeroComplexo c2 = new NumeroComplexo(Z0 - ZL.parteImaginaria * Math.Tan(beta * dpl), ZL.parteReal * Math.Tan(beta * dpl)); ;
+            return (c1 / c2) * Z0;
+        }
+        //Retorna o valor de Z, para t_minus
+        public NumeroComplexo Z_minus(double XL, double RL, double Z0, double freq, double epsilonRel)
+        {
+            double c = 299792458;
+            double beta = (2 * 3.1415) / (c / (freq * Math.Sqrt(epsilonRel)));
+            double dmin = distance_minus(XL, RL, Z0, freq, epsilonRel);
+            NumeroComplexo ZL = new NumeroComplexo(RL, XL);
+            NumeroComplexo c1 = new NumeroComplexo(ZL.parteReal, ZL.parteImaginaria + Z0 * Math.Tan(beta * dmin)); ;
+            NumeroComplexo c2 = new NumeroComplexo(Z0 - ZL.parteImaginaria * Math.Tan(beta * dmin), ZL.parteReal * Math.Tan(beta * dmin)); ;
             return (c1 / c2) * Z0;
         }
 
+        
+        
         //Retorna a razao length / lambda
-        public double length_lambda(NumeroComplexo Z, double Z0)
+        private double length_lambda(NumeroComplexo Z, double Z0)
         {
             double Y0 = (1 / Z0);
             NumeroComplexo Y = new NumeroComplexo(0, 0);
@@ -74,10 +108,11 @@ namespace Lab1
             return (1 / (2 * 3.1415)) * Math.Atan(Y0 / Y.parteImaginaria);
         }
 
+
         public double length(NumeroComplexo ZLoad, double Z0, double freq, double epsilonRel)
         {
             double c = 299792458;
-            return length_lambda(ZLoad, Z0) * (c / freq);
+            return length_lambda(ZLoad, Z0) * (c / (freq * Math.Sqrt(epsilonRel)));
         }
 
         public NumeroComplexo reflectionCoef(NumeroComplexo zl, double z0)
