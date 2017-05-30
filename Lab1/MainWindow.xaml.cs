@@ -85,5 +85,10 @@ namespace Lab1
         {
 
         }
+
+        private void ImpedanciaIntriText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -123,6 +123,7 @@ namespace Lab1
         private NumeroComplexo Z(NumeroComplexo zl, double z0, double d, double beta)
         {
             NumeroComplexo j = new NumeroComplexo(0, 1);
+            d /= 100;
             return ((zl + j*z0*Math.Tan(d*beta)) / (j*zl*Math.Tan(d*beta) + z0)) * z0;
         }
 
@@ -161,15 +162,15 @@ namespace Lab1
         public double swr_max(NumeroComplexo Zl, double Z0, double d, double f, double bw)
         {
             f += bw / 2.0;
-            double beta = 2 * 3.14159 * f;
-            Zl = this.Z(Zl, Z0, d, beta);
+            double beta = 2 * 3.14159 * f / 299792458;
+            Zl = this.Z_plus(Zl.parteImaginaria, Zl.parteReal, Z0, d, beta);
             return swr(Zl, Z0);
         }
 
         public double swr_min(NumeroComplexo Zl, double Z0, double d, double f, double bw)
         {
             f -= bw / 2.0;
-            double beta = 2 * 3.14159 * f;
+            double beta = 2 * 3.14159 * f / 299792458;
             Zl = this.Z(Zl, Z0, d, beta);
             return swr(Zl, Z0);
         }
