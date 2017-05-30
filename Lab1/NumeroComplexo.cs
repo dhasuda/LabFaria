@@ -30,7 +30,7 @@ namespace Lab1
         public double Modulo()
         {
             NumeroComplexo resposta = this * this.Complemento();
-            return resposta.parteReal;
+            return Math.Sqrt(resposta.parteReal);
         }
 
         public static NumeroComplexo operator +(NumeroComplexo c1, NumeroComplexo c2)
@@ -51,8 +51,8 @@ namespace Lab1
 
         public static NumeroComplexo operator /(NumeroComplexo c1, NumeroComplexo c2)
         {
-            NumeroComplexo resposta = c1 * c2.Complemento();
-            resposta = resposta / c2.Modulo();
+            NumeroComplexo resposta = c1 * (c2.Complemento());
+            resposta = resposta / (c2.Modulo() * c2.Modulo());
             return resposta;
         }
 

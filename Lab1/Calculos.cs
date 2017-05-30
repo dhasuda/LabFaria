@@ -188,7 +188,7 @@ namespace Lab1
             f -= bw / 2.0;
             double beta = 2 * 3.14159 * f * Math.Sqrt(epsilon) / 299792458;
             double t = this.t_plus(Zl.parteImaginaria, Zl.parteReal, Z0);
-            NumeroComplexo z1 = this.Z(Zl, Z0, t);
+            NumeroComplexo z1 = this.Z(Zl, Z0, d, beta);
             NumeroComplexo zero = new NumeroComplexo(0, 0);
             NumeroComplexo z2 = this.Z(zero, Z0, l, beta);
             NumeroComplexo one = new NumeroComplexo(1, 0);
