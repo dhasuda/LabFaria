@@ -123,7 +123,6 @@ namespace Lab1
         private NumeroComplexo Z(NumeroComplexo zl, double z0, double d, double beta)
         {
             NumeroComplexo j = new NumeroComplexo(0, 1);
-            d /= 100;
             return ((zl + j*z0*Math.Tan(d*beta)) / (j*zl*Math.Tan(d*beta) + z0)) * z0;
         }
 
@@ -159,19 +158,29 @@ namespace Lab1
             return (1 + gama) / (1 - gama);
         }
 
-        public double swr_max(NumeroComplexo Zl, double Z0, double d, double f, double bw)
+        public double swr_max(NumeroComplexo Zl, double Z0, double d, double l, double f, double bw, double epsilon)
         {
             f += bw / 2.0;
-            double beta = 2 * 3.14159 * f / 299792458;
-            Zl = this.Z_plus(Zl.parteImaginaria, Zl.parteReal, Z0, d, beta);
+            double beta = 2 * 3.14159 * f * Math.Sqrt(epsilon) / 299792458;
+            NumeroComplexo z1 = this.Z(Zl, Z0, d, beta);
+            NumeroComplexo zero = new NumeroComplexo(0, 0);
+            NumeroComplexo z2 = this.Z(zero, Z0, l, beta);
+            NumeroComplexo one = new NumeroComplexo(1, 0);
+            z1 = one / z1;
+            z2 = one / z2;
+            Zl = z1 + z2;
             return swr(Zl, Z0);
         }
 
-        public double swr_min(NumeroComplexo Zl, double Z0, double d, double f, double bw)
+        public double swr_min(NumeroComplexo Zl, double Z0, double d, double l, double f, double bw, double epsilon)
         {
             f -= bw / 2.0;
-            double beta = 2 * 3.14159 * f / 299792458;
-            Zl = this.Z(Zl, Z0, d, beta);
+            double beta = 2 * 3.14159 * f * Math.Sqrt(epsilon) / 299792458;
+            NumeroComplexo z1 = this.Z(Zl, Z0, d, beta);
+            NumeroComplexo zero = new NumeroComplexo(0, 0);
+            NumeroComplexo z2 = this.Z(zero, Z0, l, beta);
+            NumeroComplexo one = new NumeroComplexo(1, 0);
+            Zl = one / ((one / z1) + (one / z2));
             return swr(Zl, Z0);
         }
     }

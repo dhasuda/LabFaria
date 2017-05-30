@@ -46,16 +46,17 @@ namespace Lab1
                 frequencia = Convert.ToDouble(FrequenciaText.Text);
                 larguraBanda = Convert.ToDouble(LarguraBandaText.Text);
 
-                distancia1 = calculadora.distance_minus(ImpedanciaCarga.parteImaginaria,ImpedanciaCarga.parteReal,ImpedanciaIntrinseca,frequencia,PermissividadeRelativa)*100;
-                distancia2 = calculadora.distance_plus(ImpedanciaCarga.parteImaginaria, ImpedanciaCarga.parteReal, ImpedanciaIntrinseca, frequencia, PermissividadeRelativa) *100;
+                distancia1 = calculadora.distance_minus(ImpedanciaCarga.parteImaginaria,ImpedanciaCarga.parteReal,ImpedanciaIntrinseca,frequencia,PermissividadeRelativa);
+                distancia2 = calculadora.distance_plus(ImpedanciaCarga.parteImaginaria, ImpedanciaCarga.parteReal, ImpedanciaIntrinseca, frequencia, PermissividadeRelativa);
 
                 comprimento1 = calculadora.length_plus(ImpedanciaCarga, ImpedanciaCarga.parteImaginaria, ImpedanciaCarga.parteReal, ImpedanciaIntrinseca, frequencia, PermissividadeRelativa);
                 comprimento2 = calculadora.length_minus(ImpedanciaCarga, ImpedanciaCarga.parteImaginaria, ImpedanciaCarga.parteReal, ImpedanciaIntrinseca, frequencia, PermissividadeRelativa);
 
-                SWRmin = calculadora.swr_max(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, frequencia, larguraBanda);// só falta colocar o primeiro argumento dessa função
-                SWRmax = calculadora.swr_min(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, frequencia, larguraBanda);// e dessa tbm. :)
+                SWRmin = calculadora.swr_max(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, comprimento1, frequencia, larguraBanda, PermissividadeRelativa);// só falta colocar o primeiro argumento dessa função
+                SWRmax = calculadora.swr_min(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, comprimento1, frequencia, larguraBanda, PermissividadeRelativa);// e dessa tbm. :)
 
-
+                distancia1 *= 100;
+                distancia2 *= 100;
 
                 Distancia1Text.Content= Convert.ToString(distancia1);
                 Distancia2Text.Content = Convert.ToString(distancia2);
