@@ -52,8 +52,8 @@ namespace Lab1
                 comprimento1 = calculadora.length_plus(ImpedanciaCarga, ImpedanciaCarga.parteImaginaria, ImpedanciaCarga.parteReal, ImpedanciaIntrinseca, frequencia, PermissividadeRelativa);
                 comprimento2 = calculadora.length_minus(ImpedanciaCarga, ImpedanciaCarga.parteImaginaria, ImpedanciaCarga.parteReal, ImpedanciaIntrinseca, frequencia, PermissividadeRelativa);
 
-                SWRmin = calculadora.swr_max(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, comprimento1, frequencia, larguraBanda, PermissividadeRelativa);// só falta colocar o primeiro argumento dessa função
-                SWRmax = calculadora.swr_min(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, comprimento1, frequencia, larguraBanda, PermissividadeRelativa);// e dessa tbm. :)
+                SWRmin = calculadora.swr_min(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, comprimento1, frequencia, larguraBanda, PermissividadeRelativa);// só falta colocar o primeiro argumento dessa função
+                SWRmax = calculadora.swr_max(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, comprimento1, frequencia, larguraBanda, PermissividadeRelativa);// e dessa tbm. :)
 
                 distancia1 *= 100;
                 distancia2 *= 100;

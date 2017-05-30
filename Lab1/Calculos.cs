@@ -120,10 +120,20 @@ namespace Lab1
             return (1 / (2 * 3.1415)) * Math.Atan(Y0 / Y.parteImaginaria);
         }
 
+        private NumeroComplexo Z(NumeroComplexo zl, double z0, double t)
+        {
+            NumeroComplexo j = new NumeroComplexo(0, 1);
+            NumeroComplexo numerador = (zl + j * z0 * t);
+            NumeroComplexo denominador = (j * zl * t + z0);
+            return (numerador / denominador) * z0;
+        }
+
         private NumeroComplexo Z(NumeroComplexo zl, double z0, double d, double beta)
         {
             NumeroComplexo j = new NumeroComplexo(0, 1);
-            return ((zl + j*z0*Math.Tan(d*beta)) / (j*zl*Math.Tan(d*beta) + z0)) * z0;
+            NumeroComplexo numerador = (zl + j * z0 * Math.Tan(beta*d));
+            NumeroComplexo denominador = (j * zl * Math.Tan(beta * d) + z0);
+            return (numerador / denominador) * z0;
         }
 
         public double length_plus(NumeroComplexo ZLoad, double XL, double RL, double Z0, double freq, double epsilonRel)
@@ -162,13 +172,14 @@ namespace Lab1
         {
             f += bw / 2.0;
             double beta = 2 * 3.14159 * f * Math.Sqrt(epsilon) / 299792458;
-            NumeroComplexo z1 = this.Z(Zl, Z0, d, beta);
+            double t = this.t_plus(Zl.parteImaginaria, Zl.parteReal, Z0);
+            NumeroComplexo z1 = this.Z(Zl, Z0, t);
             NumeroComplexo zero = new NumeroComplexo(0, 0);
             NumeroComplexo z2 = this.Z(zero, Z0, l, beta);
             NumeroComplexo one = new NumeroComplexo(1, 0);
             z1 = one / z1;
             z2 = one / z2;
-            Zl = z1 + z2;
+            Zl = one / (z1 + z2);
             return swr(Zl, Z0);
         }
 
@@ -176,11 +187,14 @@ namespace Lab1
         {
             f -= bw / 2.0;
             double beta = 2 * 3.14159 * f * Math.Sqrt(epsilon) / 299792458;
-            NumeroComplexo z1 = this.Z(Zl, Z0, d, beta);
+            double t = this.t_plus(Zl.parteImaginaria, Zl.parteReal, Z0);
+            NumeroComplexo z1 = this.Z(Zl, Z0, t);
             NumeroComplexo zero = new NumeroComplexo(0, 0);
             NumeroComplexo z2 = this.Z(zero, Z0, l, beta);
             NumeroComplexo one = new NumeroComplexo(1, 0);
-            Zl = one / ((one / z1) + (one / z2));
+            z1 = one / z1;
+            z2 = one / z2;
+            Zl = one / (z1 + z2);
             return swr(Zl, Z0);
         }
     }
