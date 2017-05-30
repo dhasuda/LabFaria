@@ -96,8 +96,8 @@ namespace Lab1
             return (c1 / c2) * Z0;
         }
 
-        
-        
+
+
         //Retorna a razao length / lambda
         private double length_lambda(NumeroComplexo Z, double Z0)
         {
@@ -108,6 +108,11 @@ namespace Lab1
             return (1 / (2 * 3.1415)) * Math.Atan(Y0 / Y.parteImaginaria);
         }
 
+        private NumeroComplexo Z(NumeroComplexo zl, double z0, double d, double beta)
+        {
+            NumeroComplexo j = new NumeroComplexo(0, 1);
+            return ((zl + j*z0*Math.Tan(d*beta)) / (j*zl*Math.Tan(d*beta) + z0)) * z0;
+        }
 
         public double length(NumeroComplexo ZLoad, double Z0, double freq, double epsilonRel)
         {
@@ -127,6 +132,20 @@ namespace Lab1
             return (1 + gama) / (1 - gama);
         }
 
-    }
+        public double swr_max(NumeroComplexo Zl, double Z0, double d, double f, double bw)
+        {
+            f += bw / 2.0;
+            double beta = 2 * 3.14159 * f;
+            Zl = this.Z(Zl, Z0, d, beta);
+            return swr(Zl, Z0);
+        }
 
+        public double swr_min(NumeroComplexo Zl, double Z0, double d, double f, double bw)
+        {
+            f -= bw / 2.0;
+            double beta = 2 * 3.14159 * f;
+            Zl = this.Z(Zl, Z0, d, beta);
+            return swr(Zl, Z0);
+        }
+    }
 }

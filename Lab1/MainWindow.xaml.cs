@@ -52,8 +52,8 @@ namespace Lab1
                 comprimento1 = calculadora.length(ImpedanciaCarga, ImpedanciaIntrinseca, frequencia, PermissividadeRelativa);
                 comprimento2 = comprimento1;
 
-                SWRmin = calculadora.swr(,ImpedanciaIntrinseca);// só falta colocar o primeiro argumento dessa função
-                SWRmax = calculadora.swr(,ImpedanciaIntrinseca);// e dessa tbm. :)
+                SWRmin = calculadora.swr_max(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, frequencia, larguraBanda);// só falta colocar o primeiro argumento dessa função
+                SWRmax = calculadora.swr_min(ImpedanciaCarga, ImpedanciaIntrinseca, distancia1, frequencia, larguraBanda);// e dessa tbm. :)
 
 
 
@@ -63,8 +63,8 @@ namespace Lab1
                 Compimento1Text.Content = Convert.ToString(comprimento1);
                 Compimento2Text.Content = Convert.ToString(comprimento2);
 
-                SWRmaxText.Content = Convert.ToString(SWRmax);
-                SWRminText.Content = Convert.ToString(SWRmin);
+                SWRmaxLabel.Content = Convert.ToString(SWRmax);
+                SWRminLabel.Content = Convert.ToString(SWRmin);
             }
             catch(FormatException)
             {
