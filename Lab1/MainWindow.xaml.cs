@@ -58,22 +58,22 @@ namespace Lab1
                 distancia1 *= 100;
                 distancia2 *= 100;
 
-                Distancia1Text.Content= Convert.ToString(distancia1);
-                Distancia2Text.Content = Convert.ToString(distancia2);
+                Distancia1Text.Content= distancia1.ToString("#.##");
+                Distancia2Text.Content = distancia2.ToString("#.##");
 
-                Compimento1Text.Content = Convert.ToString(comprimento1);
-                Compimento2Text.Content = Convert.ToString(comprimento2);
+                Compimento1Text.Content = comprimento1.ToString("#.##");
+                Compimento2Text.Content = comprimento2.ToString("#.##");
 
-                SWRmaxLabel.Content = Convert.ToString(SWRmax);
-                SWRminLabel.Content = Convert.ToString(SWRmin);
+                SWRmaxLabel.Content = SWRmax.ToString("#.##");
+                SWRminLabel.Content = SWRmax.ToString("#.##");
             }
             catch(FormatException)
             {
-                MessageBox.Show("Um valor de impedância dado é invalido! Tente novamente.","Erro de formato");
+                MessageBox.Show("Um valor dado é invalido! Tente novamente.","Erro de formato");
             }
             catch(OverflowException)
             {
-                MessageBox.Show("Um valor de impedância é grande demais ou pequeno demais! Tente novamente.");
+                MessageBox.Show("Um valor é grande demais ou pequeno demais! Tente novamente.");
             }
         }
 
