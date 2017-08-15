@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="Calculos.js"></script>
+
+<script>
+function validateMultiForm() {
+
+
+    var x = document.forms["multiForm"]["DispModal"].value;
+
+    if ( x == "") {
+        alert("A disperção modal precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+    	alert("A disperção modal precisa ser um número positivo!")
+    	return false;
+    }
+
+    x = document.forms["multiForm"]["aten"].value;
+    if ( x == "") {
+        alert("A atenuação precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+    	alert("A atenuação precisa ser um número positivo!")
+    	return false;
+    }
+    x = document.forms["multiForm"]["BandWidth"].value;
+    if ( x == "") {
+        alert("O produto largura de Faixa*distância precisa ser preenchido!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+
+    	alert("O produto largura de Faixa*distância precisa ser um número positivo!")
+    	return false;
+    }
+
+    x = document.forms["multiForm"]["sens"].value;
+    if ( x == "") {
+        alert("A sensibilidade do receptor precisa ser preenchida!");
+        return false;
+    }else if (isNaN(x)){
+
+    	alert("A sensibilidade do receptor precisa ser um número real!")
+    	return false;
+    }
+
+    x = document.forms["multiForm"]["pLaser"].value;
+    if ( x == "") {
+        alert("A potência do laser precisa ser preenchida!");
+        return false;
+    }else if (isNaN(x)){
+
+    	alert("A potência do laser precisa ser um número real!")
+    	return false;
+    }
+
+    x = document.forms["multiForm"]["duracaoBit"].value;
+    if ( x == "") {
+        alert("A duração do bit precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+
+    	alert("A duração do bit precisa ser um número positivo!")
+    	return false;
+    }
+
+    return true;
+
+}
+
+function validateSingleForm() {
+
+
+
+
+    var x = document.forms["monoForm"]["aten"].value;
+    if ( x == "") {
+        alert("O valor de atenuação precisa ser preenchido!");
+        return false;
+    }	else if ((isNaN(x) || x <= 0)){
+    	alert("O valor de atenuação precisa ser um número positivo!")
+    	return false;
+    }
+
+
+    x = document.forms["monoForm"]["dispCrom"].value;
+    if ( x == "") {
+        alert("O valor de dispersão cromática precisa ser preenchido!");
+        return false;
+    }	else if ((isNaN(x) || x <= 0)){
+    	alert("O valor de dispersão cromática precisa ser um número positivo!")
+    	return false;
+    }
+
+
+
+    x = document.forms["monoForm"]["largEspecMin"].value;
+    if ( x == "") {
+        alert("O valor da largura espectral mínima do laser precisa ser preenchido!");
+        return false;
+    }	else if ((isNaN(x) || x <= 0)){
+    	alert("O valor da largura espectral mínima do laser precisa ser um número positivo!")
+    	return false;
+    }
+
+    x = document.forms["monoForm"]["largEspecMax"].value;
+    if ( x == "") {
+        alert("O valor da largura espectral máxima do laser precisa ser preenchido!");
+        return false;
+    }	else if ((isNaN(x) || x <= 0)){
+    	alert("O valor da largura espectral máxima do laser precisa ser um número positivo!")
+    	return false;
+    }
+
+    x = document.forms["monoForm"]["BandWidth"].value;
+    if ( x == "") {
+        alert("A largura de faixa precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+
+    	alert("A largura de faixa precisa ser um número positivo")
+    	return false;
+    }
+
+    x = document.forms["monoForm"]["sens"].value;
+    if ( x == "") {
+        alert("A sensibilidade do receptor precisa ser preenchida!");
+        return false;
+    }else if (isNaN(x)){
+
+    	alert("A sensibilidade do receptor precisa ser um número real!")
+    	return false;
+    }
+
+    x = document.forms["monoForm"]["pLaser"].value;
+    if ( x == "") {
+        alert("A potência do laser precisa ser preenchida!");
+        return false;
+    }else if (isNaN(x)){
+
+    	alert("A potência do laser precisa ser um número real!")
+    	return false;
+    }
+
+    return true;
+}
+
+function writeMultiMOut() {
+	if (validateMultiForm()){
+
+		var attenuation = parseFloat(document.forms["multiForm"]["aten"].value);
+		var receptorSens = parseFloat(document.forms["multiForm"]["sens"].value);
+		var laserPower = parseFloat(document.forms["multiForm"]["pLaser"].value);
+		var disp = parseFloat(document.forms["multiForm"]["DispModal"].value);
+    var Tbit = parseFloat(document.forms["multiForm"]["duracaoBit"].value);
+    var Brx = parseFloat(document.forms["multiForm"]["BandWidth"].value);
+
+    var distMulti = lengthMM(attenuation, receptorSens, laserPower, disp, Tbit, Brx);
+
+		document.getElementById("distMultM").value = distMulti;
+		event.preventDefault();
+	}
+}
+
+function writeMonoOuts() {
+	if (validateSingleForm()){
+
+		var attenuation = parseFloat(document.forms["monoForm"]["aten"].value);
+		var receptorSens = parseFloat(document.forms["monoForm"]["sens"].value);
+		var laserPower = parseFloat(document.forms["monoForm"]["pLaser"].value);
+		var disp = parseFloat(document.forms["monoForm"]["dispCrom"].value);
+        var largEspecMin = parseFloat(document.forms["monoForm"]["largEspecMin"].value);
+		var lambda = parseFloat(document.forms["monoForm"]["largEspecMax"].value);
+    var Tbit = parseFloat(document.forms["monoForm"]["duracaoBit"].value);
+    var Brx = parseFloat(document.forms["multiForm"]["BandWidth"].value);
+
+    var distMono = lengthSM(disp, Tbit, lambda, attenuation, receptorSens, laserPower, Brx);
+
+		document.getElementById("distSingM").value = distMono;
+		event.preventDefault();
+	}
+}
+
+
+
+</script>
+
+</head>
+
+<body>
+
+<script src="Calculos.js"></script>
+
+<h1>
+  Terceiro Laboratório - Professor TCel Faria Pires
+</h1>
+
+<p>
+  As fibras óticas são um dos pilares dos sistemas de comunicação atuais, sendo utilizadas
+  desde em sistemas domésticos, como home theaters, até em links de comunicação intercontinentais.
+<br/>
+  Um dos objetivos do seu estudo é determinar até qual distância é possível fazer uma ligação de fibra ótica. Para isso, são
+  necessárias informações acerca da fibra em si, do laser utilizado e do sistema receptor.
+ <br/>
+ <br/>
+  Neste site é possível calcular essa distância em função desses parâmetros.
+</p>
+
+<h2>Fibras Multimodo</h2>
+
+<div class="firstInput">
+<h3 class="IOsep">Entradas</h3>
+<form name="multiForm" onsubmit="return writeMultiMOut()">
+	<p class="inputLabel">Dispersão Modal:</p>
+	<input type="text" name="DispModal">
+	<p class="units">ns/km</p>
+	<p class="inputLabel">Atenuação:</p>
+	<input type="text" name="aten">
+	<p class="units">dB/km</p>
+	<p class="inputLabel">Sensibilidade do Receptor:</p>
+	<input type="text" name="sens">
+	<p class="units">dBm</p>
+	<p class="inputLabel">Potência do Laser:</p>
+	<input type="text" name="pLaser">
+	<p class="units">dBm</p>
+	<p class="inputLabel">Duração do bit:</p>
+	<input type="text" name="duracaoBit">
+	<p class="units">ns</p>
+  	<p class="inputLabel">Produto largura de Faixa*distância:</p>
+	<input type="text" name="BandWidth">
+	<p class="units">GHz*km</p>
+  <br/>
+	<input type="submit" name="Calcular">
+	<input type="reset">
+</form>
+</div>
+
+<div class="firstOutput">
+<h3 class="IOsep">Saída</h3>
+<p class="outputLabel">Máximo comprimento do link:</p>
+<input id="distMultM" type ="text">
+<p class="units">km</p>
+</div>
+
+
+<hr>
+
+<h2>Fibras Monomodo</h2>
+<div class="secondInput">
+<h3 class="IOsep">Entradas</h3>
+<form name = "monoForm" onsubmit="return writeMonoOuts()">
+  <p class="inputLabel">Atenuação:</p>
+	<input type="text" name="aten">
+	<p class="units">dB/km</p>
+	<p class="inputLabel">Dispersão Cromática:</p>
+	<input type="text" name="dispCrom">
+	<p class="units">ns/(km*nm)</p>
+	<p class="inputLabel">Largura Espectral mínima do Laser:</p>
+	<input type="text" name="largEspecMin">
+	<p class="units">nm</p>
+  	<p class="inputLabel">Largura Espectral máxima do Laser:</p>
+	<input type="text" name="largEspecMax">
+	<p class="units">nm</p>
+	<p class="inputLabel">Sensibilidade do Receptor:</p>
+	<input type="text" name="sens">
+	<p class="units">dBm</p>
+	<p class="inputLabel">Potência do Laser:</p>
+	<input type="text" name="pLaser">
+	<p class="units">dBm</p>
+    <p class="inputLabel">Duração do bit:</p>
+	<input type="text" name="duracaoBit">
+	<p class="units">ns</p>
+    <p class="inputLabel">Produto largura de Faixa*distância:</p>
+    <input type="text" name="BandWidth">
+    <p class="units">GHz*km</p>
+  <br/>
+	<input type="submit" name="Calcular">
+	<input type="reset">
+</form>
+</div>
+
+<div class="secondOutput">
+<h3 class="IOsep">Saída</h3>
+<p class="outputLabel">Máximo comprimento do link:</p>
+<input id="distSingM" type ="text">
+<p class="units">km</p>
+</div>
+
+
+
+<p>
+  Professor:<br/>
+  TCel Faria Pires<br/><br/>
+  Alunos:<br/>
+  Alynne Mara Alencar Justa<br/>
+  Davi Grossi Hasuda <br/>
+  Eduardo Henrique Ferreira Silva<br/>
+  Gustavo Nahum Alvarez Ferreira<br/>
+  <br/>
+  COMP 19 - ITA 2017
+</p>
+
+</body>
+</html>

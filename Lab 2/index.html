@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="Calculos.js"></script>
+
+<script>
+
+
+function validateSintForm() {
+
+
+    var x = document.forms["sintForm"]["Z0"].value;
+
+    if ( x == "") {
+        alert("A impedância característica precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+    	alert("A impedância característica precisa ser um número positivo!")
+    	return false;
+    }
+
+    x = document.forms["sintForm"]["Er"].value;
+    if ( x == "") {
+        alert("A permissividade elétrica relativa precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+    	alert("A permissividade elétrica relativa precisa ser um número positivo!")
+    	return false;
+    }
+    x = document.forms["sintForm"]["sigma"].value;
+    if ( x == "") {
+        alert("A condutividade elétrica precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+
+    	alert("A condutividade elétrica precisa ser um número positivo!")
+    	return false;
+    }
+
+    x = document.forms["sintForm"]["tanDelta"].value;
+    if ( x == "") {
+        alert("A tangente de perdas precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+    	alert("A condutividade elétrica relativa precisa ser um número não negativo!")
+    	return false;
+    }
+
+    x = document.forms["sintForm"]["freq"].value;
+    if ( x == "") {
+        alert("A frequência precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+    	alert("A cfrequência precisa ser um número positivo")
+    	return false;
+    }
+
+    return true;
+
+}
+
+function validateAnalForm() {
+
+
+    var x = document.forms["analForm"]["W"].value;
+    if ( x == "") {
+        alert("O valor de 'W' precisa ser preenchido!");
+        return false;
+    }	else if ((isNaN(x) || x <= 0)){
+    	alert("O valor de 'W' ser um número positivo!")
+    	return false;
+    }
+
+    var x = document.forms["analForm"]["d"].value;
+    if ( x == "") {
+        alert("O valor de 'd' precisa ser preenchido!");
+        return false;
+    }	else if ((isNaN(x) || x <= 0)){
+    	alert("O valor de 'd' precisa ser um número positivo!")
+    	return false;
+    }
+
+    x = document.forms["analForm"]["Er"].value;
+    if ( x == "") {
+        alert("A permissividade elétrica relativa precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+    	alert("A permissividade elétrica relativa precisa ser um número positivo!")
+    	return false;
+    }
+
+    x = document.forms["analForm"]["sigma"].value;
+    if ( x == "") {
+        alert("A condutividade elétrica precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+
+    	alert("A condutividade elétrica precisa ser um número positivo!")
+    	return false;
+    }
+
+    x = document.forms["analForm"]["tanDelta"].value;
+    if ( x == "") {
+        alert("A tangente de perdas precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+    	alert("A condutividade elétrica relativa precisa ser um número não negativo!")
+    	return false;
+    }
+
+    x = document.forms["analForm"]["freq"].value;
+    if ( x == "") {
+        alert("A frequência precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+    	alert("A frequência precisa ser um número positivo")
+    	return false;
+
+    }
+    return true;
+}
+
+function writeSintOuts() {
+	if (validateSintForm()){
+		var z0 = parseFloat(document.forms["sintForm"]["Z0"].value);
+		var er = parseFloat(document.forms["sintForm"]["Er"].value);
+		var sigma = parseFloat(document.forms["sintForm"]["sigma"].value);
+		var tanDelta = parseFloat(document.forms["sintForm"]["tanDelta"].value);
+		var freq = parseFloat(document.forms["sintForm"]["freq"].value);
+
+		var Wd_var = Wd (A (z0, er), B (z0, er), er);
+		var ee_var = Ee (er, Wd_var);
+		var vp_var = vp (ee_var);
+		var Rs_var = Rs(freq, sigma);
+		var beta_var = beta(freq, er);
+		var lambdaG_var = lambdaGuiado (vp(ee_var), freq);
+		var alphaD_var = alphaD (freq, er, ee_var, tanDelta);
+		var alphaC_var = alphaC (Rs_var, z0, 0.001);
+
+		document.getElementById("sint_out_wd").value = Wd_var;
+		event.preventDefault();
+		document.getElementById("sint_out_Ee").value = ee_var;
+		event.preventDefault();
+		document.getElementById("sint_out_B").value = beta_var;
+		event.preventDefault();
+		document.getElementById("sint_out_lambdaG").value = lambdaG_var;
+		event.preventDefault();
+		document.getElementById("sint_out_alphaD").value = alphaD_var;
+		event.preventDefault();
+		document.getElementById("sint_out_alphaC").value = alphaC_var;
+		event.preventDefault();
+	}
+}
+
+function writeAnalOuts() {
+	if (validateAnalForm()){
+
+		var Wgiven = parseFloat(document.forms["analForm"]["W"].value);
+		var d = parseFloat(document.forms["analForm"]["d"].value);
+		var er = parseFloat(document.forms["analForm"]["Er"].value);
+		var sigma = parseFloat(document.forms["analForm"]["sigma"].value);
+		var tanDelta = parseFloat(document.forms["analForm"]["tanDelta"].value);
+		var freq = parseFloat(document.forms["analForm"]["freq"].value);
+		var Wd= Wgiven/d;
+
+		var ee_var = Ee (er, Wd);
+		var vp_var = vp (ee_var);
+		var Z0_var = Z0 (Wd, ee_var);
+		var Rs_var = Rs(freq, sigma)
+		var beta_var = beta(freq, er);
+		var lambdaG_var = lambdaGuiado (vp_var, freq);
+		var alphaD_var = alphaD (freq, er, ee_var, tanDelta);
+		var alphaC_var = alphaC (Rs_var, Z0_var, 0.001);
+
+
+		document.getElementById("anal_out_Z0").value = Z0_var;
+		event.preventDefault();
+		document.getElementById("anal_out_Ee").value = ee_var;
+		event.preventDefault();
+		document.getElementById("anal_out_B").value = beta_var;
+		event.preventDefault();
+		document.getElementById("anal_out_lambdaG").value = lambdaG_var;
+		event.preventDefault();
+		document.getElementById("anal_out_alphaD").value = alphaD_var;
+		event.preventDefault();
+		document.getElementById("anal_out_alphaC").value = alphaC_var;
+		event.preventDefault();
+
+	}
+}
+
+
+</script>
+
+</head>
+
+
+<body>
+
+<script src="Calculos.js"></script>
+
+<h1>
+  Segundo Laboratório - Professor TCel Faria Pires
+</h1>
+
+<p>
+  As microfitas têm ampla aplicação em antenas,
+linhas de transmissão em circuitos integrados,
+casadores de impedância, divisores de potência, etc.
+<br/>
+  Para que o trabalho se possa analisar ou sintetizar de forma eficiente
+  e eficaz uma microfita é necessário conhecer seus parâmetros e
+  a dependência que há entre eles. Neste site é possível calcular de forma
+   rápida vários desses parâmetros em função de outros.
+</p>
+
+
+<h2>Síntese de Micro Strip Line</h2>
+
+<div class="firstInput">
+<h3 class="IOsep">Entradas</h3>
+<form name="sintForm" onsubmit="return writeSintOuts()">
+	<p class="inputLabel">Impedância Característica:</p>
+	<input type="text" name="Z0">
+	<p class="units">Ohms</p>
+	<p class="inputLabel">Condutividade Elétrica:</p>
+	<input type="text" name="sigma">
+	<p class="units">1/(Ohm*m)</p>
+	<p class="inputLabel">Tangente de Perdas:</p>
+	<input type="text" name="tanDelta">
+	<p class="inputLabel">Frequência:</p>
+	<input type="text" name="freq">
+	<p class="units">Hz</p>
+  <p class="inputLabel">Permissividade Elétrica Relativa:</p>
+  <input type="text" name="Er">
+  <br/>
+	<input type="submit" name="Calcular">
+	<input type="reset">
+</form>
+</div>
+
+
+<div class="firstOutput">
+<h3 class="IOsep">Saidas</h3>
+<p class="outputLabel">W/d:</p>
+<input id="sint_out_wd" type ="text">
+<p class="outputLabel">Permissividade Elétrica Efetiva:</p>
+<input id="sint_out_Ee" type ="text">
+<p class="outputLabel">Beta:</p>
+<input id="sint_out_B" type ="text">
+<p class="units">1/m</p>
+<p class="outputLabel">Comprimento de onda guiado:</p>
+<input id="sint_out_lambdaG" type ="text">
+<p class="units">m</p>
+<p class="outputLabel">Atenuação no dielétrico:</p>
+<input id="sint_out_alphaD" type ="text">
+<p class="outputLabel">Atenuação no condutor:</p>
+<input id="sint_out_alphaC" type ="text">
+
+
+</div>
+
+<hr>
+
+<h2>Análise de Micro Strip Line</h2>
+<div class="secondInput">
+<h3 class="IOsep">Entradas</h3>
+<form name = "analForm" onsubmit="return writeAnalOuts()">
+	<p class="inputLabel">W:</p>
+	<input type="text" name="W">
+	<p class="units">m</p>
+	<p class="inputLabel">d:</p>
+	<input type="text" name="d">
+	<p class="units">m</p>
+
+	<p class="inputLabel">Condutividade Elétrica:</p>
+	<input type="text" name="sigma">
+	<p class="units">1/(Ohm*m)</p>
+	<p class="inputLabel">Tangente de Perdas:</p>
+	<input type="text" name="tanDelta">
+	<p class="inputLabel">Frequência:</p>
+	<input type="text" name="freq">
+	<p class="units">Hz</p>
+  <p class="inputLabel">Permissividade Elétrica Relativa:</p>
+	<input type="text" name="Er">
+  <br/>
+	<input type="submit" name="Calcular">
+	<input type="reset">
+</form>
+</div>
+
+<div class="secondOutput">
+<h3 class="IOsep">Saidas</h3>
+<p class="outputLabel">Impedância característica:</p>
+<input id="anal_out_Z0" type ="text">
+<p class="units">Ohms</p>
+<p class="outputLabel">Permissividade Elétrica Efetiva:</p>
+<input id="anal_out_Ee" type ="text">
+<p class="outputLabel">Beta:</p>
+<input id="anal_out_B" type ="text">
+<p class="units">1/m</p>
+<p class="outputLabel">Comprimento de onda guiado:</p>
+<input id="anal_out_lambdaG" type ="text">
+<p class="units">m</p>
+<p class="outputLabel">Atenuação no dielétrico:</p>
+<input id="anal_out_alphaD" type ="text">
+<p class="outputLabel">Atenuação no condutor:</p>
+<input id="anal_out_alphaC" type ="text">
+</div>
+
+<p>
+  Professor:<br/>
+  TCel Faria Pires<br/><br/>
+  Alunos:<br/>
+  Alynne Mara Alencar Justa<br/>
+  Davi Grossi Hasuda <br/>
+  Eduardo Henrique Ferreira Silva<br/>
+  Gustavo Nahum Alvarez Ferreira<br/>
+  <br/>
+  COMP 19 - ITA 2017
+</p>
+
+</body>
+</html>

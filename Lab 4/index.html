@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="Calculos.js"></script>
+
+<script type="text/javascript">
+
+
+function validateVisDirForm() {
+    var x = document.forms["VisadaDireta"]["pTrans"].value;
+
+    if ( x == "") {
+        alert("A potência transmitida precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+      alert("A potência transmitida precisa ser um número positivo!")
+      return false;
+    }
+
+    x = document.forms["VisadaDireta"]["sRecept"].value;
+    if ( x == "") {
+        alert("A sensibilidade do receptor precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+      alert("A sensibilidade do receptor precisa ser um número positivo!")
+      return false;
+    }
+    x = document.forms["VisadaDireta"]["gTrans"].value;
+    if ( x == "") {
+        alert("O ganho da antena transmissora precisa ser preenchida!");
+        return false;
+    }else if (isNaN(x)){
+
+      alert("O ganho da antena transmissora ser um número real!")
+      return false;
+    }
+
+    x = document.forms["VisadaDireta"]["gRecept"].value;
+    if ( x == "") {
+        alert("O ganho da antena receptora precisa ser preenchida!");
+        return false;
+    }else if (isNaN(x)){
+
+      alert("O ganho da antena receptora precisa ser um número real!")
+      return false;
+    }
+
+    x = document.forms["VisadaDireta"]["dist"].value;
+    if ( x == "") {
+        alert("A distância precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("A distância precisa ser um número positivo")
+      return false;
+    }
+
+        x = document.forms["VisadaDireta"]["lambda"].value;
+    if ( x == "") {
+        alert("O comprimento de onda precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("O comprimento de onda precisa ser um número positivo")
+      return false;
+    }
+
+    return true;
+}
+function validateReflexForm() {
+
+
+    var x = document.forms["reflex"]["pTrans"].value;
+
+    if ( x == "") {
+        alert("A potência transmitida precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+      alert("A potência transmitida precisa ser um número positivo!")
+      return false;
+    }
+
+    x = document.forms["reflex"]["sRecept"].value;
+    if ( x == "") {
+        alert("A sensibilidade do receptor precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+      alert("A sensibilidade do receptor precisa ser um número positivo!")
+      return false;
+    }
+    x = document.forms["reflex"]["gTrans"].value;
+    if ( x == "") {
+        alert("O ganho da antena transmissora precisa ser preenchida!");
+        return false;
+    }else if (isNaN(x)){
+
+      alert("O ganho da antena transmissora ser um número real!")
+      return false;
+    }
+
+    x = document.forms["reflex"]["gRecept"].value;
+    if ( x == "") {
+        alert("O ganho da antena receptora precisa ser preenchida!");
+        return false;
+    }else if (isNaN(x)){
+
+      alert("O ganho da antena receptora precisa ser um número real!")
+      return false;
+    }
+
+    x = document.forms["reflex"]["dist"].value;
+    if ( x == "") {
+        alert("A distância precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("A distância precisa ser um número positivo")
+      return false;
+    }
+
+
+    x = document.forms["reflex"]["hTrans"].value;
+    if ( x == "") {
+        alert("A altura da antena transmissora precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("A altura da antena transmissora precisa ser um número positivo")
+      return false;
+    }
+
+    x = document.forms["reflex"]["hRecept"].value;
+    if ( x == "") {
+        alert("A altura da antena receptora precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("A altura da antena receptora precisa ser um número positivo")
+      return false;
+    }
+
+    return true;
+}
+function validateFacaForm() {
+
+
+    var x = document.forms["faca"]["pTrans"].value;
+
+    if ( x == "") {
+        alert("A potência transmitida precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+      alert("A potência transmitida precisa ser um número positivo!")
+      return false;
+    }
+
+    x = document.forms["faca"]["sRecept"].value;
+    if ( x == "") {
+        alert("A sensibilidade do receptor precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+      alert("A sensibilidade do receptor precisa ser um número positivo!")
+      return false;
+    }
+    x = document.forms["faca"]["gTrans"].value;
+    if ( x == "") {
+        alert("O ganho da antena transmissora precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x <= 0)){
+
+      alert("O ganho da antena transmissora ser um número positivo!")
+      return false;
+    }
+
+    x = document.forms["faca"]["gRecept"].value;
+    if ( x == "") {
+        alert("O ganho da antena receptora precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("O ganho da antena receptora precisa ser um número não negativo!")
+      return false;
+    }
+
+        x = document.forms["faca"]["lambda"].value;
+    if ( x == "") {
+        alert("O comprimento de onda precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("O comprimento de onda precisa ser um número positivo")
+      return false;
+    }
+
+    x = document.forms["faca"]["hTrans"].value;
+    if ( x == "") {
+        alert("A altura da antena transmissora precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("A altura da antena transmissora precisa ser um número positivo")
+      return false;
+    }
+
+    x = document.forms["faca"]["hRecept"].value;
+    if ( x == "") {
+        alert("A altura da antena receptora precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("A altura da antena receptora precisa ser um número positivo")
+      return false;
+    }
+
+    x = document.forms["faca"]["dTrans"].value;
+    if ( x == "") {
+        alert("A distância da antena transmissora precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("A distância da antena transmissora precisa ser um número positivo")
+      return false;
+    }
+    x = document.forms["faca"]["dRecept"].value;
+    if ( x == "") {
+        alert("A distância da antena receptora precisa ser preenchida!");
+        return false;
+    }else if ((isNaN(x) || x < 0)){
+
+      alert("A distância da antena receptora precisa ser um número positivo")
+      return false;
+    }
+    return true;
+}
+function writeVisDirOuts() {
+  if (validateVisDirForm()){
+
+    var pt = parseFloat(document.forms["VisadaDireta"]["pTrans"].value);
+    var lamda = parseFloat(document.forms["VisadaDireta"]["lambda"].value);
+    var distance = parseFloat(document.forms["VisadaDireta"]["dist"].value);
+    var gt = parseFloat(document.forms["VisadaDireta"]["gTrans"].value);
+    var gr = parseFloat(document.forms["VisadaDireta"]["gRecept"].value);
+    var receiverSens = parseFloat(document.forms["VisadaDireta"]["sRecept"].value);
+
+    var porDir = direct(pt, lamda, distance, gt, gr);
+    document.getElementById("potVisDir").value = porDir;
+    event.preventDefault();
+
+    if(isViable(porDir, receiverSens)){
+      document.getElementById("viavelVisDir").value = "Sim";
+      event.preventDefault();
+    }
+    else{
+      document.getElementById("viavelVisDir").value = "Não";
+    }
+  
+  }
+}
+function writeReflexOuts() {
+  if (validateReflexForm()){
+
+    var pt = parseFloat(document.forms["reflex"]["pTrans"].value);
+    var distance = parseFloat(document.forms["reflex"]["dist"].value);
+    var gt = parseFloat(document.forms["reflex"]["gTrans"].value);
+    var gr = parseFloat(document.forms["reflex"]["gRecept"].value);
+    var receiverSens = parseFloat(document.forms["reflex"]["sRecept"].value);
+    var ht = parseFloat(document.forms["reflex"]["hTrans"].value);
+    var hr = parseFloat(document.forms["reflex"]["hRecept"].value);
+
+    var potReflex = reflection(pt, gt, gr, ht, hr, distance);
+
+    document.getElementById("potReflex").value = potReflex;
+    event.preventDefault();
+    if(isViable(potReflex, receiverSens)){
+      document.getElementById("viavelReflex").value = "Sim";
+      event.preventDefault();
+    }
+    else if(!isViable(potReflex, receiverSens)){
+      document.getElementById("viavelReflex").value = "Não";
+    }
+  }
+}
+
+function writeFacaOuts() {
+if (validateFacaForm()){
+	  var pt = parseFloat(document.forms["faca"]["pTrans"].value);
+    var vlambda = parseFloat(document.forms["faca"]["lambda"].value);
+    var gt = parseFloat(document.forms["faca"]["gTrans"].value);
+    var gr = parseFloat(document.forms["faca"]["gRecept"].value);
+    var receiverSens = parseFloat(document.forms["faca"]["sRecept"].value);
+    //var ht = parseFloat(document.forms["faca"]["hTrans"].value);
+    //var hr = parseFloat(document.forms["faca"]["hRecept"].value);
+    var d1 = parseFloat(document.forms["faca"]["dTrans"].value);
+    var d2 = parseFloat(document.forms["faca"]["dRecept"].value);
+    var h = parseFloat(document.forms["faca"]["hObst"].value);
+    var pFaca = difraction(pt, gt, gr, h, d1, d2, vlambda);
+
+    document.getElementById("potFaca").value = pFaca;
+    event.preventDefault();
+
+    if(isViable(pFaca, receiverSens)){
+      document.getElementById("viavelFaca").value = "Sim";
+      event.preventDefault();
+    }
+    else if(!isViable(potReflex, receiverSens)){
+      document.getElementById("viavelFaca").value = "Não";
+    }
+  }
+}
+
+</script>
+</head>
+
+<body>
+
+<script src="Calculos.js"></script>
+
+<h1>
+  Quarto Laboratório - Professor TCel Faria Pires
+</h1>
+
+<p>
+ As antenas são um dos dispositivos eletrônicos mais importantes para a telecomunicação moderna. Uma grande quantidade de eletrônicos que utilizamos no nosso dia a dia dependem de alguma forma de antenas.
+ Um dos intuitos de estudá-las é determinar se um conjunto transmissor-receptor, a uma dada distância, é ou não viável, segundo um modelo de propagação. E é esse o objetivo deste site.
+<br/>
+</p>
+
+<h2>Linha de Visada Direta</h2>
+
+<div class="firstInput">
+<h3 class="IOsep">Entradas</h3>
+<form name="VisadaDireta" onsubmit="return writeVisDirOuts()">
+	<p class="inputLabel">Potência do transmissor:</p>
+	<input type="text" name="pTrans">
+	<p class="units">W</p>
+	<p class="inputLabel">Sensibilidade do receptor:</p>
+	<input type="text" name="sRecept">
+	<p class="units">W</p>
+	<p class="inputLabel">Ganho da antena transmissora:</p>
+	<input type="text" name="gTrans">
+	<p class="units">dBi</p>
+	<p class="inputLabel">Ganho da antena receptora:</p>
+	<input type="text" name="gRecept">
+	<p class="units">dBi</p>
+	<p class="inputLabel">Distância entre as antenas:</p>
+	<input type="text" name="dist">
+	<p class="units">m</p>
+  	<p class="inputLabel">Comprimento de onda:</p>
+  	<input type="text" name="lambda">
+  	<p class="units">nm</p>
+  <br/>
+	<input type="submit" name="Calcular">
+	<input type="reset">
+</form>
+</div>
+
+<div class="firstOutput">
+<h3 class="IOsep">Saídas</h3>
+<p class="outputLabel">Potência de chegada no receptor:</p>
+<input id="potVisDir" type ="text">
+<p class="units">W</p>
+<p class="outputLabel">O link é viável?</p>
+<input id="viavelVisDir" type ="text">
+
+</div>
+
+<h2>Reflexão de dois raios</h2>
+
+<div class="secondInput">
+<h3 class="IOsep">Entradas</h3>
+<form name="reflex" onsubmit="return writeReflexOuts()">
+	<p class="inputLabel">Potência do transmissor:</p>
+	<input type="text" name="pTrans">
+	<p class="units">W</p>
+	<p class="inputLabel">Sensibilidade do receptor:</p>
+	<input type="text" name="sRecept">
+	<p class="units">W</p>
+	<p class="inputLabel">Ganho da antena transmissora:</p>
+	<input type="text" name="gTrans">
+	<p class="units">dBi</p>
+	<p class="inputLabel">Altura da antena transmissora:</p>
+	<input type="text" name="hTrans">
+	<p class="units">m</p>
+	<p class="inputLabel">Ganho da antena receptora:</p>
+	<input type="text" name="gRecept">
+	<p class="units">dBi</p>
+	<p class="inputLabel">Altura da antena receptora:</p>
+	<input type="text" name="hRecept">
+	<p class="units">m</p>
+	<p class="inputLabel">Distância entre as antenas:</p>
+	<input type="text" name="dist">
+	<p class="units">m</p>
+  <br/>
+	<input type="submit" name="Calcular">
+	<input type="reset">
+</form>
+</div>
+
+<div class="secondOutput">
+<h3 class="IOsep">Saídas</h3>
+<p class="outputLabel">Potência de chegada no receptor:</p>
+<input id="potReflex" type ="text">
+<p class="units">W</p>
+<p class="outputLabel">O link é viável?</p>
+<input id="viavelReflex" type ="text">
+
+</div>
+
+<h2>Difração de Gume de Faca</h2>
+
+<div class="secondInput">
+<h3 class="IOsep">Entradas</h3>
+<form name="faca" onsubmit="return writeFacaOuts()">
+	<p class="inputLabel">Potência do transmissor:</p>
+	<input type="text" name="pTrans">
+	<p class="units">W</p>
+	<p class="inputLabel">Sensibilidade do receptor:</p>
+	<input type="text" name="sRecept">
+	<p class="units">W</p>
+	<p class="inputLabel">Ganho da antena transmissora:</p>
+	<input type="text" name="gTrans">
+	<p class="units">dBi</p>
+	<p class="inputLabel">Altura da antena transmissora:</p>
+	<input type="text" name="hTrans">
+	<p class="units">m</p>
+	<p class="inputLabel">Ganho da antena receptora:</p>
+	<input type="text" name="gRecept">
+	<p class="units">dBi</p>
+	<p class="inputLabel">Altura da antena receptora:</p>
+	<input type="text" name="hRecept">
+	<p class="units">m</p>
+	<p class="inputLabel">Altura do obstáculo:</p>
+	<input type="text" name="hObst">
+	<p class="units">m</p>
+	<p class="inputLabel">Distância da transmissora ao obstáculo:</p>
+	<input type="text" name="dTrans">
+	<p class="units">m</p>
+	<p class="inputLabel">Distância da receptora ao obstáculo:</p>
+	<input type="text" name="dRecept">
+	<p class="units">m</p>
+  	<p class="inputLabel">Comprimento de onda:</p>
+  	<input type="text" name="lambda">
+  	<p class="units">nm</p>
+  <br/>
+	<input type="submit" name="Calcular">
+	<input type="reset">
+</form>
+</div>
+
+<div class="secondOutput">
+<h3 class="IOsep">Saídas</h3>
+<p class="outputLabel">Potência de chegada no receptor:</p>
+<input id="potFaca" type ="text">
+<p class="units">W</p>
+<p class="outputLabel">O link é viável?</p>
+<input id="viavelFaca" type ="text">
+
+</div>
+
+<p>
+  Professor:<br/>
+  TCel Faria Pires<br/><br/>
+  Alunos:<br/>
+  Alynne Mara Alencar Justa<br/>
+  Davi Grossi Hasuda <br/>
+  Eduardo Henrique Ferreira Silva<br/>
+  Gustavo Nahum Alvarez Ferreira<br/>
+  <br/>
+  COMP 19 - ITA 2017
+</p>
+
+
+
+</body>
+</html>

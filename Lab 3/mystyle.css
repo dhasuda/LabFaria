@@ -1,0 +1,82 @@
+body {
+  background-color: lightGrey;
+}
+
+h1 {
+  color: black;
+  text-align: left;
+  text-decoration: none;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+h2 {
+  color: green;
+  text-align: left;
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+
+input {
+  color: black;
+  text-align: left;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: normal;
+  font-family: monospace;
+}
+
+.inputLabel {
+  color: black;
+  text-align: left;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-bottom: 5px;
+}
+
+.outputLabel {
+  color: black;
+  text-align: left;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-bottom: 5px;
+}
+
+.firstInput {
+  display:inline-block;
+  margin-right:100px;
+
+}
+
+.firstOutput {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.secondInput {
+  display:inline-block;
+  margin-right:100px;
+}
+
+.secondOutput {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.units {
+  display: inline-block;
+  color: black;
+  font-family: sans-serif;
+}
+
+.IOsep {
+  color: green;
+}
